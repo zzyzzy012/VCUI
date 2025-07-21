@@ -1,0 +1,99 @@
+:root {
+  --vk-color-primary: #409EFF;
+  --vk-color-primary-light-9: #ecf5ff;
+  --vk-color-primary-dark: #337ecc;
+
+  --vk-color-success: #67c23a;
+  --vk-color-success-light-9: #f0f9eb;
+  --vk-color-success-dark: #4caf50;
+
+  --vk-color-warning: #e6a23c;
+  --vk-color-warning-light-9: #fdf6ec;
+  --vk-color-warning-dark: #c9822e;
+
+  --vk-color-danger: #f56c6c;
+  --vk-color-danger-light-9: #fef0f0;
+  --vk-color-danger-dark: #c45656;
+
+  --vk-color-info: #909399;
+  --vk-color-info-light-9: #f4f4f5;
+  --vk-color-info-dark: #606266;
+
+  --vk-color-white: #ffffff;
+}
+
+.vk-alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  position: relative;
+  margin: 8px 0;
+  box-sizing: border-box;
+
+  /* 浅色模式（默认） */
+  &.vk-alert--light {
+    &.vk-alert-primary {
+      background-color: var(--vk-color-primary-light-9);
+      color: var(--vk-color-primary);
+    }
+    &.vk-alert-success {
+      background-color: var(--vk-color-success-light-9);
+      color: var(--vk-color-success);
+    }
+    &.vk-alert-warning {
+      background-color: var(--vk-color-warning-light-9);
+      color: var(--vk-color-warning);
+    }
+    &.vk-alert-danger {
+      background-color: var(--vk-color-danger-light-9);
+      color: var(--vk-color-danger);
+    }
+    &.vk-alert-info {
+      background-color: var(--vk-color-info-light-9);
+      color: var(--vk-color-info);
+    }
+  }
+
+  /* 深色模式 */
+  &.vk-alert--dark {
+    &.vk-alert-primary {
+      background-color: var(--vk-color-primary-dark);
+      color: var(--vk-color-white);
+    }
+    &.vk-alert-success {
+      background-color: var(--vk-color-success-dark);
+      color: var(--vk-color-white);
+    }
+    &.vk-alert-warning {
+      background-color: var(--vk-color-warning-dark);
+      color: var(--vk-color-white);
+    }
+    &.vk-alert-danger {
+      background-color: var(--vk-color-danger-dark);
+      color: var(--vk-color-white);
+    }
+    &.vk-alert-info {
+      background-color: var(--vk-color-info-dark);
+      color: var(--vk-color-white);
+    }
+  }
+
+  .vk-alert__title {
+    font-weight: 500;
+    flex: 1;
+  }
+
+  .vk-alert__close {
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 12px;
+  }
+
+  &.is-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

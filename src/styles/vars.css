@@ -1,0 +1,96 @@
+:root {
+  /* colors */
+  --vk-color-white: #ffffff;
+  --vk-color-black: #000000;
+  --colors: (primary: #409eff, success: #67c23a, warning: #e6a23c, danger: #f56c6c, info: #909399);
+
+  @each $val, $color in var(--colors) {
+    --vk-color-$(val): $(color);
+    @for $i from 3 to 9 by 2 {
+      --vk-color-$(val)-light-$(i): mix(#fff, $(color), .$(i));
+    }
+    --vk-color-$(val)-light-8: mix(#fff, $(color), 0.8);
+    --vk-color-$(val)-dark-2: mix(#000, $(color), 0.2);
+  }
+  /* --vk-color-primary: #409eff;
+  --vk-color-primary-light-3: rgb(121.3, 187.1, 255);
+  --vk-color-primary-light-5: rgb(159.5, 206.5, 255);
+  --vk-color-primary-light-7: rgb(197.7, 225.9, 255);
+  --vk-color-primary-light-8: rgb(216.8, 235.6, 255);
+  --vk-color-primary-light-9: rgb(235.9, 245.3, 255);
+  --vk-color-primary-dark-2: rgb(51.2, 126.4, 204);
+  --vk-color-success: #67c23a;
+  --vk-color-success-light-3: rgb(148.6, 212.3, 117.1);
+  --vk-color-success-light-5: rgb(179, 224.5, 156.5);
+  --vk-color-success-light-7: rgb(209.4, 236.7, 195.9);
+  --vk-color-success-light-8: rgb(224.6, 242.8, 215.6);
+  --vk-color-success-light-9: rgb(239.8, 248.9, 235.3);
+  --vk-color-success-dark-2: rgb(82.4, 155.2, 46.4);
+  --vk-color-warning: #e6a23c;
+  --vk-color-warning-light-3: rgb(237.5, 189.9, 118.5);
+  --vk-color-warning-light-5: rgb(242.5, 208.5, 157.5);
+  --vk-color-warning-light-7: rgb(247.5, 227.1, 196.5);
+  --vk-color-warning-light-8: rgb(250, 236.4, 216);
+  --vk-color-warning-light-9: rgb(252.5, 245.7, 235.5);
+  --vk-color-warning-dark-2: rgb(184, 129.6, 48);
+  --vk-color-danger: #f56c6c;
+  --vk-color-danger-light-3: rgb(248, 152.1, 152.1);
+  --vk-color-danger-light-5: rgb(250, 181.5, 181.5);
+  --vk-color-danger-light-7: rgb(252, 210.9, 210.9);
+  --vk-color-danger-light-8: rgb(253, 225.6, 225.6);
+  --vk-color-danger-light-9: rgb(254, 240.3, 240.3);
+  --vk-color-danger-dark-2: rgb(196, 86.4, 86.4); */
+
+  --vk-bg-color: #ffffff;
+  --vk-bg-color-page: #f2f3f5;
+  --vk-bg-color-overlay: #ffffff;
+  --vk-text-color-primary: #303133;
+  --vk-text-color-regular: #606266;
+  --vk-text-color-secondary: #909399;
+  --vk-text-color-placeholder: #a8abb2;
+  --vk-text-color-disabled: #c0c4cc;
+  --vk-border-color: #dcdfe6;
+  --vk-border-color-light: #e4e7ed;
+  --vk-border-color-lighter: #ebeef5;
+  --vk-border-color-extra-light: #f2f6fc;
+  --vk-border-color-dark: #d4d7de;
+  --vk-border-color-darker: #cdd0d6;
+  --vk-fill-color: #f0f2f5;
+  --vk-fill-color-light: #f5f7fa;
+  --vk-fill-color-lighter: #fafafa;
+  --vk-fill-color-extra-light: #fafcff;
+  --vk-fill-color-dark: #ebedf0;
+  --vk-fill-color-darker: #e6e8eb;
+  --vk-fill-color-blank: #ffffff;
+
+  /* border */
+  --vk-border-width: 1px;
+  --vk-border-style: solid;
+  --vk-border-color-hover: var(--vk-text-color-disabled);
+  --vk-border: var(--vk-border-width) var(--vk-border-style) var(--vk-border-color);
+  --vk-border-radius-base: 4px;
+  --vk-border-radius-small: 2px;
+  --vk-border-radius-round: 20px;
+  --vk-border-radius-circle: 100%;
+
+  /*font*/
+  --vk-font-size-extra-large: 20px;
+  --vk-font-size-large: 18px;
+  --vk-font-size-medium: 16px;
+  --vk-font-size-base: 14px;
+  --vk-font-size-small: 13px;
+  --vk-font-size-extra-small: 12px;
+  --vk-font-family:
+    'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    '\5fae\8f6f\96c5\9ed1', Arial, sans-serif;
+  --vk-font-weight-primary: 500;
+
+  /*disabled*/
+  --vk-disabled-bg-color: var(--vk-fill-color-light);
+  --vk-disabled-text-color: var(--vk-text-color-placeholder);
+  --vk-disabled-border-color: var(--vk-border-color-light);
+
+  /*animation*/
+  --vk-transition-duration: 0.3s;
+  --vk-transition-duration-fast: 0.2s;
+}
