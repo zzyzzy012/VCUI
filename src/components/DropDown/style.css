@@ -8,13 +8,50 @@
   display: inline-block;
   .vk-tooltip {
     --vk-popover-padding: 5px 0;
+    --vk-popover-bg-color: #ffffff;
+    --vk-popover-border-color: var(--vk-border-color);
+  }
+
+  .vk-tooltip__popper {
+    color: var(--vk-text-color-regular);
+
+    #arrow {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+    }
+
+    &[data-popper-placement^='top'] > #arrow {
+      bottom: -6px;
+      border-top-color: var(--vk-popover-bg-color);
+      border-bottom: none;
+    }
+
+    &[data-popper-placement^='bottom'] > #arrow {
+      top: -6px;
+      border-bottom-color: var(--vk-popover-bg-color);
+      border-top: none;
+    }
+
+    &[data-popper-placement^='left'] > #arrow {
+      right: -6px;
+      border-left-color: var(--vk-popover-bg-color);
+      border-right: none;
+    }
+
+    &[data-popper-placement^='right'] > #arrow {
+      left: -6px;
+      border-right-color: var(--vk-popover-bg-color);
+      border-left: none;
+    }
   }
 }
 .vk-dropdown__menu {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  .vk-dropdown__item {
+  .vk-dropdown__menu-item {
     display: flex;
     align-items: center;
     white-space: nowrap;

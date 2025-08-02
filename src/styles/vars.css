@@ -93,4 +93,7 @@
   /*animation*/
   --vk-transition-duration: 0.3s;
   --vk-transition-duration-fast: 0.2s;
+  
+  /* Message 组件变量 */
+  --vk-message-text-color: var(--vk-text-color-regular);
 }

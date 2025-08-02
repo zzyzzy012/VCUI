@@ -13,15 +13,17 @@ export const createMessage = (props: CreateMessageProps) => {
   // 组件卸载
   const destory = () => {
     // 删除数组中的实例
-    const index = instances.findIndex(instance => instance.id === id)
-    if (index !== -1) { return }
+    const index = instances.findIndex((instance) => instance.id === id)
+    if (index === -1) {
+      return
+    }
     instances.splice(index, 1)
     // 销毁组件
     render(null, container)
   }
   // 手动销毁
   const manualDestroy = () => {
-    const instance = instances.find(instance => instance.id === id)
+    const instance = instances.find((instance) => instance.id === id)
     if (instance) {
       instance.vm.exposed!.isVisible.value = false
     }
@@ -45,7 +47,7 @@ export const createMessage = (props: CreateMessageProps) => {
     vnode,
     props: newProps,
     destroy: manualDestroy,
-    vm: vnode.component!
+    vm: vnode.component!,
   }
   instances.push(instance)
   return instance
@@ -58,7 +60,7 @@ export const getLastInstance = () => {
 // 获取最后一项组件实例底部的偏移位置
 export const getLastBottomOffset = (id: string) => {
   // return 0
-  const idx = instances.findIndex(instance => instance.id === id)
+  const idx = instances.findIndex((instance) => instance.id === id)
   if (idx <= 0) {
     return 0
   } else {

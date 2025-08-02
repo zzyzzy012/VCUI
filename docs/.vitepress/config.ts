@@ -14,6 +14,10 @@ export default defineConfig({
         '~': path.resolve(__dirname, '../../'), // ~ => 项目根目录
       },
     },
+    // 添加组件自动导入
+    optimizeDeps: {
+      include: ['vue', '@vueuse/core'],
+    },
   },
   markdown: {
     config(md) {

@@ -1,15 +1,16 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="vk-switch"
+  <div
+    class="vk-switch"
     :class="{
       [`vk-switch--${size}`]: size,
       'is-disabled': disabled,
-      'ischecked': checked
+      'is-checked': checked,
     }"
     @click="switchValue"
   >
     <input
-      class='vk-switch__input'
+      class="vk-switch__input"
       type="checkbox"
       role="switch"
       :name="name"
@@ -34,7 +35,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 
 defineOptions({
   name: 'vk-switch',
-  inheritAttrs: false
+  inheritAttrs: false,
 })
 
 const props = withDefaults(defineProps<SwitchProps>(), {
@@ -59,11 +60,12 @@ onMounted(() => {
 watch(checked, (value) => {
   input.value!.checked = value
 })
-watch(() => props.modelValue, (value) => {
-  innerValue.value = value
-})
+watch(
+  () => props.modelValue,
+  (value) => {
+    innerValue.value = value
+  },
+)
 </script>
 
-<style>
-
-</style>
+<style></style>
