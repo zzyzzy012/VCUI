@@ -1,19 +1,20 @@
 <script setup lang="ts">
-// import VNode from './VNode'
-import VNode from '@/VNode.tsx'
-
-import { createMessage } from '@/components/Message/method'
-import Button from '@/components/Button/Button.vue'
-
-const open = () => {
-  createMessage({ message: 'hello world' })
-}
+// import Button from '@/components/Button/Button.vue'
 </script>
 
 <template>
   <div class="app">
-    基于 Vue3开发的仿照element-plus的UI组件库
-    <VNode msg="hello world " />
-    <Button @click="open">打开消息提示</Button>
+    <h1>基于 Vue3开发的仿照element-plus的UI组件库</h1>
   </div>
 </template>
+
+<style>
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 100vw; */
+  height: 100vh;
+  padding: 20px;
+}
+</style>

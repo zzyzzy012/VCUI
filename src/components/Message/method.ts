@@ -8,63 +8,91 @@ let seed = 1
 const instances: MessageContext[] = shallowReactive([])
 
 export const createMessage = (props: CreateMessageProps) => {
-  const { nextZIndex } = useZIndex()
-  const id = `message_${seed++}`
-  // 组件卸载
-  const destory = () => {
-    // 删除数组中的实例
-    const index = instances.findIndex((instance) => instance.id === id)
-    if (index === -1) {
-      return
-    }
-    instances.splice(index, 1)
-    // 销毁组件
-    render(null, container)
-  }
-  // 手动销毁
-  const manualDestroy = () => {
-    const instance = instances.find((instance) => instance.id === id)
-    if (instance) {
-      instance.vm.exposed!.isVisible.value = false
-    }
-  }
-  const newProps = {
-    ...props,
-    id,
-    // zIndex: 2000,
-    zIndex: nextZIndex(),
-    onDestroy: destory,
-  }
-  const container = document.createElement('div')
-  // const vnode = h(Message, props)
-  const vnode = h(Message, newProps)
-  render(vnode, container)
-  // 只将container的第一个子元素添加到body中，!排除null和undefined情况
-  document.body.appendChild(container.firstElementChild!)
+  try {
+    const { nextZIndex } = useZIndex()
+    const id = `message_${seed++}`
 
-  const instance = {
-    id,
-    vnode,
-    props: newProps,
-    destroy: manualDestroy,
-    vm: vnode.component!,
+    // 组件卸载
+    const destory = () => {
+      // 删除数组中的实例
+      const index = instances.findIndex((instance) => instance.id === id)
+      if (index === -1) {
+        return
+      }
+      instances.splice(index, 1)
+      // 销毁组件
+      render(null, container)
+      // 移除 DOM 元素
+      if (container.firstElementChild && container.firstElementChild.parentNode) {
+        container.firstElementChild.parentNode.removeChild(container.firstElementChild)
+      }
+    }
+
+    // 手动销毁
+    const manualDestroy = () => {
+      const instance = instances.find((instance) => instance.id === id)
+      if (instance) {
+        instance.vm.exposed!.isVisible.value = false
+      }
+    }
+
+    const newProps = {
+      ...props,
+      id,
+      zIndex: nextZIndex(),
+      onDestroy: destory,
+    }
+
+    const container = document.createElement('div')
+    const vnode = h(Message, newProps)
+
+    render(vnode, container)
+
+    // 只将container的第一个子元素添加到body中，!排除null和undefined情况
+    const firstElement = container.firstElementChild
+    if (firstElement) {
+      document.body.appendChild(firstElement)
+    } else {
+      throw new Error('Failed to create message element')
+    }
+
+    const instance = {
+      id,
+      vnode,
+      props: newProps,
+      destroy: manualDestroy,
+      vm: vnode.component!,
+    }
+    instances.push(instance)
+    return instance
+  } catch (error) {
+    throw error
   }
-  instances.push(instance)
-  return instance
 }
 
 export const getLastInstance = () => {
   // 最后一项
   return instances.at(-1)
 }
-// 获取最后一项组件实例底部的偏移位置
+
+// 获取当前消息应该显示的位置
 export const getLastBottomOffset = (id: string) => {
-  // return 0
   const idx = instances.findIndex((instance) => instance.id === id)
   if (idx <= 0) {
     return 0
   } else {
-    const prev = instances[idx - 1]
-    return prev.vm.exposed!.bottomOffset.value
+    // 计算前面所有实例的总高度
+    let totalHeight = 0
+    for (let i = 0; i < idx; i++) {
+      const prev = instances[i]
+      if (prev && prev.vm.exposed) {
+        // 获取每个消息的高度
+        const messageHeight = prev.vm.exposed.height?.value || 0
+        totalHeight += messageHeight
+        // 添加间距
+        totalHeight += 16 // 16px 间距
+      }
+    }
+    return totalHeight
   }
 }

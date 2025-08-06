@@ -42,7 +42,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<MessageProps>(), {
   type: 'info',
-  duration: 3000,
+  duration: 3000, // 改为 3 秒
   offset: 20,
   transitionName: 'fade-up',
 })
@@ -61,7 +61,8 @@ const lastOffset = computed(() => {
 
 // 这个元素的top
 const topOffset = computed(() => {
-  return props.offset + lastOffset.value
+  const offset = props.offset + lastOffset.value
+  return offset
 })
 
 // 这个元素为下一个元素预留的 offset，也就是它最底端的 bottom 的值
@@ -105,8 +106,10 @@ onMounted(async () => {
 
   // 等待DOM渲染完成，拿到最新height
   await nextTick()
+  await nextTick() // 再等一个 tick 确保完全渲染
   if (messageRef.value) {
-    height.value = messageRef.value.getBoundingClientRect().height
+    const rect = messageRef.value.getBoundingClientRect()
+    height.value = rect.height
   }
 })
 
@@ -126,7 +129,8 @@ function destroyComponent() {
 
 function updateComponent() {
   if (messageRef.value) {
-    height.value = messageRef.value.getBoundingClientRect().height
+    const rect = messageRef.value.getBoundingClientRect()
+    height.value = rect.height
   }
 }
 
@@ -146,5 +150,6 @@ onMounted(() => {
 defineExpose({
   bottomOffset,
   isVisible,
+  height, // 暴露 height 属性
 })
 </script>
